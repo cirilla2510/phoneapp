@@ -1,0 +1,210 @@
+.buttons
+{
+overflow:auto;
+text-align: center;
+font-size: 2.0em;
+font-weight: bold;
+line-height: 100%;
+
+}
+
+.buttons a
+{
+display: inline-block;
+width: 2.5em;
+height: 1.2em;
+margin-bottom: 0em;
+padding-top: .6em;
+padding-bottom: .6em;
+color: #fff;
+background-color: #aaabbb;
+border-radius: 5px;
+border: solid #cccccc 1px;
+box-shadow: 2px 2px 1px #888888;
+clear:right;
+float:right;
+}
+
+.buttons a:active
+{
+box-shadow: 1px 1px 0px #888888;
+}
+
+.buttons a:hover {
+background:#09c;
+border-color:09c;
+}
+
+.buttons b
+{
+display: inline-block;
+width: 5.1em;
+height: 1.2em;
+margin-bottom: 0em;
+padding-top: .6em;
+padding-bottom: .6em;
+color: #fff;
+background-color: #aaabbb;
+border-radius: 5px;
+border: solid #cccccc 1px;
+box-shadow: 2px 2px 1px #888888;
+align:center;
+}
+
+.buttons b:active
+{
+box-shadow: 1px 1px 0px #888888;
+}
+
+.buttons b:hover {
+background:#09c;
+border-color:09c;
+}
+
+.loginbuttons
+{
+overflow:auto;
+text-align: center;
+font-size: 1.2em;
+font-weight: bold;
+line-height: 100%;
+
+}
+
+.loginbuttons c
+{
+display: inline-block;
+width: 5.0em;
+height: 0.6em;
+margin-bottom: 0em;
+padding-top: .2em;
+padding-bottom: .6em;
+color: #fff;
+background-color: #aaabbb;
+border-radius: 5px;
+border: solid #cccccc 1px;
+box-shadow: 2px 2px 1px #888888;
+text-align:center;
+cursor       : pointer;
+
+}
+
+.loginbuttons c:active
+{
+box-shadow: 1px 1px 0px #888888;
+}
+
+.loginbuttons c:hover {
+background:#09c;
+border-color:09c;
+}
+
+
+
+
+.phtext
+{
+	text-align: right;
+	font-size: 1.5em;
+	font-weight: bold;
+	font-family:sans-serif;
+	line-height: 100%;
+	color:blue;
+	
+}
+
+.login
+{
+	text-align: center;
+	font-size: 1.0em;
+	font-weight: bold;
+	width: 30em;
+	height: 6em;
+	margin-bottom: 0em;
+	padding-top: .6em;
+	padding-bottom: .6em;
+	color: rgb(0,0,0);
+	background-color: rgb(255,255,255);
+	border-radius: 5px;
+	border: solid #cccccc 1px;
+	box-shadow: 2px 2px 1px #888888;
+	align:center;
+}
+
+.logina
+{	
+	height:10em;
+	width:20em;
+	text-align: left;
+	font-size: 1em;
+	font-weight: bold;
+	font-family:sans-serif;
+	color:#09c;	
+}
+
+
+.input {
+    height: 1.5em; /* for IE */
+    vertical-align: middle; /* This is optional but it makes legacy IEs look better */
+	border: 1px lightblue solid;
+	border-radius: 5px;
+	
+}
+
+.input:focus, textarea:focus {
+  
+  border-radius: 5px;
+  outline      : none;
+}
+
+.table {
+	border: 1px blue solid;
+	box-shadow: 2px 2px 1px #888888;
+	background-color: #66CCFF;
+	border-radius: 15px;
+	padding-top: .6em;
+	padding-bottom: .6em;
+	padding-left: .6em;
+	padding-right: .6em;
+	
+	 
+}
+
+
+.logoutbuttons
+{
+overflow:auto;
+text-align: center;
+font-size: 1.2em;
+font-weight: bold;
+line-height: 100%;
+
+}
+
+.logoutbuttons c
+{
+display: inline-block;
+width: 3.5em;
+height: 0.6em;
+margin-bottom: 0em;
+padding-top: .2em;
+padding-bottom: .6em;
+color: #fff;
+background-color: #aaabbb;
+border-radius: 5px;
+border: solid #cccccc 1px;
+box-shadow: 2px 2px 1px #888888;
+text-align:center;
+cursor       : pointer;
+
+}
+
+.logoutbuttons c:active
+{
+box-shadow: 1px 1px 0px #888888;
+}
+
+.logoutbuttons c:hover {
+background:#09c;
+border-color:09c;
+}

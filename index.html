@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!--<title> Web Dialer Demo</title>-->
+		<meta name = "keywords" content = "WebRTC, SIP, Dialer, SIP Phone, WebPhone, WebDialer, SIP Dialer, VoIP, WebRTC Dialer" />
+		<!--<meta name = "description" content = "This is SIP protocol based webdialer based on Webrtc for media. This can work with any of your existing SIP Server. This demo demontrates the seamless integration of the webdialer with your existing SIP infrstructure." />-->
+		
+		<meta name = "author" content = "Varun Pratap Singh varunps1984@gmail.com" />
+		<link rel="stylesheet" href="styles.css">
+	</head>
+	<body>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
+		<script src="jssip-3.3.4.js" type="text/javascript"></script>
+		<!-- <script> JsSIP.debug.enable('JsSIP:*');</script> -->
+		<script language="javascript" type="text/javascript">
+		$(document).ready(function(){console.log("Doc is ready");});
+		
+		var phnumber="";
+		var crypto_phone=null;
+		var session =null;
+		console.log("I am working");
+		
+		function callMe(){
+			console.log("I hit the func");
+			console.log(document.getElementById("mcall"), document.getElementById("num_dial"));
+			// Register callbacks to desired call events
+			console.log(document.getElementById("mcall").innerHTML);
+			if(document.getElementById("mcall").innerHTML == "Call"){
+			var eventHandlers = {
+				//alert("");
+  			'progress': function(e) {
+				$("#call_status").text("Calling... "+phnumber);
+    			console.log('call is in progress');
+				console.log(document.getElementById("mcall"), document.getElementById("num_dial"));
+			},
+			'failed': function(e) {
+				$("#call_status").text("Call Failed...");
+				console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhxxxxxxxxxxxx");
+				
+				//document.getElementById("num_dial").innerHTML="varun";
+				
+				//console.log('call failed with cause: '+ e.data.cause);
+				document.getElementById("mcall").innerHTML = "Call";
+				
+				
+				//document.getElementById("num_dial").display="varun";
+				
+			},
+			'ended': function(e) {
+				//alert("i hit end");
+				console.log(document.getElementById("mcall"), document.getElementById("num_dial"));
+				document.getElementById("mcall").innerHTML = "Call";
+				$("#call_status").text("Call Ended...");
+				//console.log('call ended with cause: '+ e.data.cause);
+				phnumber="";
+				console.log("The dialed number shall be empty now");
+				document.getElementById("num_dial").innerHTML=phnumber;
+				
+			},
+			'confirmed': function(e) {
+				$("#call_status").text("Call Connected");
+				console.log('call confirmed');
+				//document.getElementById("mcall").innerHTML = "End";
+				console.log(document.getElementById("mcall"), document.getElementById("num_dial"));
+			}
+			};
+
+			var options = {
+			'eventHandlers'    : eventHandlers,
+			'mediaConstraints' : { 'audio': true, 'video': false },
+			'pcConfig': {
+   		 		'iceServers': [
+      			{ 'urls': ['stun:stun.antisip.com:3478']}
+      			//{ 'urls': 'turn:example.com', 'username': 'foo', 'credential': ' 1234' }
+    			]
+  			}
+			};
+
+			if(phnumber.length>0)
+			{
+				var sip_uri = "sip:" + phnumber + "@204.244.129.6:5060";
+
+				console.log(document.getElementById("mcall"), document.getElementById("num_dial"));
+		
+				session = crypto_phone.call(sip_uri, options);
+				console.log(document.getElementById("mcall"), document.getElementById("num_dial"));
+				if(session==null)
+				{alert("session is null");}
+				if(session){
+				session.connection.addEventListener('addstream', function(event)
+				{
+					//alert("it is called where we called video tag");
+					console.log("cccccccccccccccccccccccccccccccccccccccccccc");
+					var audio = document.createElement('audio');
+						audio.srcObject = event.stream;
+						audio.play();  
+				});
+				}
+				//console.log(session);
+			}
+			
+		}else{
+			crypto_phone.terminateSessions();
+			
+		}
+		
+	} //End of calling logic
+
+
+
+		function enterphnumber(digit)
+		{
+			console.log(document.getElementById("num_dial"));
+			//alert(digit);
+			switch(digit)
+			{
+				case 0:{phnumber=""+phnumber + digit; $("#num_dial").text(phnumber); console.log(phnumber);}
+				break;
+				case 1:{phnumber=""+phnumber + digit; document.getElementById("num_dial").innerHTML=phnumber; console.log(phnumber);}
+				break;
+				case 2:{phnumber=""+phnumber + digit; document.getElementById("num_dial").innerHTML=phnumber; console.log(phnumber);}
+				break;
+				case 3:{phnumber=""+phnumber + digit; document.getElementById("num_dial").innerHTML=phnumber; console.log(phnumber);}
+				break;
+				case 4:{phnumber=""+phnumber + digit; document.getElementById("num_dial").innerHTML=phnumber; console.log(phnumber);}
+				break;
+				case 5:{phnumber=""+phnumber + digit; document.getElementById("num_dial").innerHTML=phnumber; console.log(phnumber);}
+				break;
+				case 6:{phnumber=""+phnumber + digit; document.getElementById("num_dial").innerHTML=phnumber; console.log(phnumber);}
+				break;
+				case 7:{phnumber=""+phnumber + digit; document.getElementById("num_dial").innerHTML=phnumber; console.log(phnumber);}
+				break;
+				case 8:{phnumber=""+phnumber + digit; document.getElementById("num_dial").innerHTML=phnumber; console.log(phnumber);}
+				break;
+				case 9:{phnumber=""+phnumber + digit; document.getElementById("num_dial").innerHTML=phnumber; console.log(phnumber);}
+				break;
+				default:{document.getElementById("num_dial").innerHTML=phnumber;}
+				break;
+			}
+			
+		}
+		function deletelastdigit()
+		{
+			if(phnumber.length>0)
+			{
+				phnumber = phnumber.substring(0, phnumber.length - 1);
+				document.getElementById("num_dial").innerHTML=phnumber;
+			}
+		}
+		
+		function hidelogin()
+		{
+			$("#login_form").hide();
+			
+		}
+		
+		function hidetable()
+		{
+			var ltable = document.getElementById("dialpad");
+			ltable.style.display = "none";
+		}
+		function displaytable()
+		{
+
+			let login_user = document.getElementById("login_user").value;
+			let login_pass = document.getElementById("login_pass").value;
+
+			if(login_user.length <=0)
+			{
+				if(login_user.password <=0)
+				{
+					alert("Please enter valid username and password !");
+					document.getElementById("login_user").focus();
+				}else{
+					alert("Please enter valid username !");
+					document.getElementById("login_user").focus();
+				}
+				
+			}
+			else{
+
+			hidelogin();
+			
+			var ltable = document.getElementById("dialpad");
+			ltable.style.display = "table";
+			
+			//SIP UA Creation
+			var socket = new JsSIP.WebSocketInterface('wss://app2.telepbx.ca:443');
+			
+			let sip_uri = "sip:" + login_user + "@204.244.129.6:5060";
+
+			console.log(sip_uri+" "+login_pass);
+
+			var configuration = {
+  				sockets  : [ socket ],
+  				uri      : sip_uri,
+  				password : login_pass,
+				use_preloaded_route: true,
+				session_timers: false
+				
+			};
+
+			crypto_phone = new JsSIP.UA(configuration);
+
+			//WS events
+			crypto_phone.on('connected', function(e){ $("#ua_status").text("WS Connected..."); });
+			crypto_phone.on('disconnected', function(e){ $("#ua_status").text("WS Disconnected...");  });
+
+			//Register Events
+			crypto_phone.on('registered', function(e){ $("#ua_status").text("Registered..."); });
+			crypto_phone.on('unregistered', function(e){ $("#ua_status").text("Un Registered..."); });
+			crypto_phone.on('registrationFailed', function(e){ $("#ua_status").text("Registration Failed..."); });
+
+			//Call / Receive Events 
+			crypto_phone.on('newRTCSession', function(data){
+				$("#call_status").text("Calling..."+phnumber);	
+				document.getElementById("mcall").innerHTML = "End";		
+			});
+
+				
+
+			crypto_phone.start();
+			console.log("xxxxxxxxxxxxxxxxxxxxSIP UA Created and started!xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");		
+			//var elementStyle = document.getElementById("dialpad").style;
+			//elementStyle.position = "absolute";
+			//elementStyle.top = "0px";
+			//elementStyle.left = "0px";
+		}
+		}
+		function test()
+		{
+			var myvalue=1000;
+			alert(myvalue);
+			document.getElementById("desc").innerHTML = myvalue;			
+		}
+
+		function testmycall(){alert("Func is clicked");
+		console.log("Func is Clicked ");}
+		
+		function test1()
+		{
+			//var myvalue=document.getElementById("mcall");;
+			//alert(myvalue);
+			document.getElementById("mcall").innerHTML = "End";			
+		}
+		//window.addEventListener('load',	testload(), false);
+		window.onload= function()
+		{
+			hidetable();
+			//displaytable();
+			var table = document.getElementById("dialpad");
+			//alert(table);
+			//var cells = table.getElementsByTagName("td");
+			//for (var i = 2; i < cells.length; i++) {
+				//if(i==2)
+				//{
+				//	cells[i].onclick = function(){
+				//	test1();
+				  //}
+				//}
+				//else
+				//{
+				//cells[i].onclick = function(){
+					//test();
+				    //var pdigit = i;
+					//alert(pdigit);
+					//enterphnumber(pdigit);
+					//}
+				//}
+			//}
+		}
+		</script>
+		
+		<!--<h1></h1>
+		<p id="desc">This is SIP protocol based webdialer based on WebRTC for media. This can work with any of your existing SIP Server. This demo demontrates the seamless integration of the webdialer with your existing SIP infrstructure.</p>
+		-->
+		<div id="login_form" align="left">
+		<form id="credentials" class="logina">
+		    	<table id= "logintable">
+				<tr>
+					<td colspan="2" align="center" >Login<br /><br /></td>
+				</tr>				
+				<tr>
+					<td>Username:</td> <td><input type = "text" class="input" id="login_user" autofocus><br /></td>
+				</tr>
+				<tr>
+					<td>Password:</td><td><input type = "password" class="input" id="login_pass"><br /></td>
+				</tr>
+				<!--<tr>
+					<td>SIP Server IP:</td><td><input type = "text" class="input"><br /></td>
+				</tr>-->
+				<td colspan="2" align="center" ><br /></td>
+				<tr class="loginbuttons">
+				    <td></td>
+					<td onclick="displaytable()"><c>Login</c></td>
+				</tr>
+					
+				</table>
+        </form>
+		</div>
+		
+		<table id="dialpad" class="table" align="left">
+			<!-- <audio id="my_audio" autoplay>Not Supported</audio> -->
+			<!-- <video id="my_video" autoplay>
+				Your browser does not support the VIDEO tag and/or RTP streams.
+			</video> -->
+			<tr>
+				<td id="ua_status" position ="center" colspan = "2">Ready..</td>
+				<td class=logoutbuttons onclick="location.reload()"><c>Logout</c></td>
+			</tr>
+			<tr>
+				<td height= "100" position ="center" colspan = "3"><p id="call_status"></p><p id="num_dial" class="phtext"></p></td>
+			</tr>
+			<tr class="buttons">
+				<td onclick = "callMe()" colspan = "2"><b id="mcall">Call</b></td>
+				<td onclick="deletelastdigit()"><a><</a></td>				
+			</tr>			
+			<tr class="buttons">
+				<td onclick="enterphnumber(1)"><a>1</a></td>
+				<td onclick="enterphnumber(2)"><a>2</a></td>
+				<td onclick="enterphnumber(3)"><a>3</a></td>
+			</tr>
+			<tr class="buttons">
+				<td onclick="enterphnumber(4)"><a>4</a></td>
+				<td onclick="enterphnumber(5)"><a>5</a></td>
+				<td onclick="enterphnumber(6)"><a>6</a></td>
+			</tr>
+			<tr class="buttons">
+				<td onclick="enterphnumber(7)"><a>7</a></td>
+				<td onclick="enterphnumber(8)"><a>8</a></td>
+				<td onclick="enterphnumber(9)"><a>9</a></td>
+			</tr>
+			<tr class="buttons">
+				<td><a>*</a></td>
+				<td onclick="enterphnumber(0)"><a>0</a></td>
+				<td><a>#</a></td>
+			</tr>
+		</table>
+	</body>
+</html>
